@@ -6,91 +6,287 @@
   <title>Gpyks Portfolio</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f8f9fa;
-      color: #333;
+      background: #121212;
+      color: #f1f1f1;
+      scroll-behavior: smooth;
     }
     header {
-      background: #222;
-      color: white;
+      background: #1e1e1e;
       padding: 20px;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; /* 🔄 Change to flex-end for top-right */
+    }
+    header img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid #007bff;
+      margin-right: 15px;
     }
     header h1 {
       margin: 0;
-      font-size: 2.5rem;
+      font-size: 1.8rem;
     }
     header p {
       margin: 5px 0 0;
-      font-size: 1.2rem;
+      font-size: 1rem;
+      color: #ccc;
+      min-height: 20px;
     }
     section {
-      padding: 40px 20px;
-      max-width: 800px;
+      padding: 50px 20px;
+      max-width: 1000px;
       margin: auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
     }
     h2 {
-      border-bottom: 2px solid #222;
+      border-bottom: 2px solid #007bff;
+      display: inline-block;
+      margin-bottom: 20px;
       padding-bottom: 5px;
+      font-size: 1.6rem;
     }
-    ul {
-      list-style: none;
-      padding: 0;
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
-    ul li {
-      margin: 10px 0;
+    .skill {
+      background: #1e1e1e;
+      padding: 10px 16px;
+      border-radius: 20px;
+      border: 1px solid #007bff;
+      font-size: 0.9rem;
     }
-    a {
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .project {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
+      opacity: 1;
+    }
+    .project.hide {
+      opacity: 0;
+      transform: scale(0.95);
+      pointer-events: none;
+    }
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    }
+    .project h3 {
+      margin-top: 0;
+    }
+    .project a {
       color: #007bff;
       text-decoration: none;
+      font-weight: bold;
     }
-    a:hover {
+    .filter-buttons {
+      margin-bottom: 20px;
+      text-align: center;
+      flex-wrap: wrap;
+    }
+    .filter-buttons button {
+      background: #1e1e1e;
+      color: #f1f1f1;
+      border: 1px solid #007bff;
+      padding: 8px 16px;
+      margin: 5px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .filter-buttons button:hover,
+    .filter-buttons button.active {
+      background: #007bff;
+      color: #fff;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .contact-links a {
+      color: #007bff;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+    .contact-links a:hover {
       text-decoration: underline;
     }
     footer {
-      background: #222;
-      color: white;
+      background: #1e1e1e;
+      color: #ccc;
       text-align: center;
-      padding: 15px;
-      margin-top: 30px;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    /* 📱 Mobile Responsiveness */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+      header img {
+        margin: 0 0 10px 0;
+      }
+      header h1 {
+        font-size: 1.6rem;
+      }
+      .projects {
+        grid-template-columns: 1fr;
+      }
+      .contact-links {
+        flex-direction: column;
+        gap: 10px;
+      }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Gpyks</h1>
-  <p>Python Developer | AI Enthusiast| AI App and AI Automation</p>
+  <img src="profile.jpg" alt="Gpyks Profile Picture">
+  <div>
+    <h1>Gpyks</h1>
+    <p id="tagline"></p>
+  </div>
 </header>
 
 <section>
   <h2>About Me</h2>
   <p>
     Hi! I'm Gpyks, a Python developer passionate about AI, automation, and problem-solving.
-    I’ve been learning Python and building projects to sharpen my skills.
+    I’ve been learning Python libraries like <strong>NumPy, Pandas, Matplotlib, and Scikit-learn</strong>,
+    and I enjoy building AI agents and apps that make life easier.
   </p>
 </section>
 
 <section>
+  <h2>Skills</h2>
+  <div class="skills">
+    <div class="skill">Python</div>
+    <div class="skill">NumPy</div>
+    <div class="skill">Pandas</div>
+    <div class="skill">Matplotlib</div>
+    <div class="skill">Scikit-learn</div>
+    <div class="skill">PyQt5</div>
+    <div class="skill">APIs</div>
+    <div class="skill">Automation</div>
+  </div>
+</section>
+
+<section>
   <h2>Projects</h2>
-  <ul>
-    <li><a href="https://github.com/Gpykss/pythonprojects">Python Practice & Fully Functional Projects</a></li>
-    <li><a href="#"></a></li>
-  </ul>
+
+  <!-- Filter Buttons -->
+  <div class="filter-buttons">
+    <button onclick="filterProjects('all')" class="active">All</button>
+    <button onclick="filterProjects('python')">Python</button>
+    <button onclick="filterProjects('ai')">AI</button>
+    <button onclick="filterProjects('automation')">Automation</button>
+  </div>
+
+  <div class="projects">
+    <div class="project" data-category="python">
+      <h3>Weather App</h3>
+      <p>A weather app built using API and PyQt5 GUI.</p>
+      <a href="https://github.com/Gpykss/pythonprojects">View on GitHub</a>
+    </div>
+
+    <div class="project" data-category="automation">
+      <h3>Other Apps</h3>
+      <p>Check out my other automation and AI-related projects.</p>
+      <a href="https://github.com/Gpykss">View on GitHub</a>
+    </div>
+
+    <div class="project" data-category="ai">
+      <h3>Coming Soon...</h3>
+      <p>Stay tuned for more AI & automation projects.</p>
+    </div>
+  </div>
 </section>
 
 <section>
   <h2>Contact</h2>
-  <p>Email: yourname@email.com</p>
-  <p>GitHub: <a href="https://github.com/Gpykss">github.com/Gpykss</a></p>
-  <p>LinkedIn: (Add later when ready)</p>
+  <div class="contact-links">
+    <a href="mailto:yourname@email.com">📧 Email</a>
+    <a href="https://github.com/Gpykss">🐙 GitHub</a>
+    <a href="https://linkedin.com/in/yourprofile">🔗 LinkedIn</a>
+    <a href="#">🐦 Twitter (coming soon)</a>
+  </div>
 </section>
 
 <footer>
-  <p>© 2025 Gpyks</p>
+  <p>© 2025 Gpyks | Built with ❤️ in Python & Web</p>
 </footer>
+
+<script>
+  // Typing Effect
+  const text = "Python Developer | AI Enthusiast | Automation Builder";
+  let index = 0;
+  function type() {
+    if (index < text.length) {
+      document.getElementById("tagline").innerHTML += text.charAt(index);
+      index++;
+      setTimeout(type, 100);
+    }
+  }
+  window.onload = type;
+
+  // Fade-in on scroll
+  const sections = document.querySelectorAll("section");
+  const reveal = () => {
+    const trigger = window.innerHeight * 0.85;
+    sections.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if (top < trigger) {
+        sec.classList.add("show");
+      }
+    });
+  };
+  window.addEventListener("scroll", reveal);
+  reveal();
+
+  // Project Filtering
+  function filterProjects(category) {
+    const projects = document.querySelectorAll('.project');
+    const buttons = document.querySelectorAll('.filter-buttons button');
+
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    projects.forEach(project => {
+      if (category === 'all' || project.dataset.category === category) {
+        project.classList.remove('hide');
+      } else {
+        project.classList.add('hide');
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
